@@ -4,44 +4,56 @@
     <div class="form-group">
       <label for="name">Name</label>
       <input id="name" name="name" class="form-control" placeholder="Name" [(ngModel)]="userSettings.name"
-        (blur)="onBlur(nameField)"
-        [class.field-error]="form.submitted && nameField.invalid"
-       required #nameField="ngModel" />
+        (blur)="onBlur(nameField)" [class.field-error]="form.submitted && nameField.invalid" required
+        #nameField="ngModel" />
       <div [hidden]="!form.submitted || nameField.valid" class="alert alert-danger">Enter a name</div>
     </div>
+    <div class="form-group">
+      <label for="startDate">Start Date</label>
+      <input type="text" placeholder="Start Date" class="form-control" [(ngModel)]="startDate" name="startDate"
+        id="startDate" bsDaterangepicker>
+    </div>
+    <p>Start Date: {{ startDate }}</p>
+    <button type="button" class="btn btn-primary" name="singleModel" [(ngModel)]="singleModel" btnCheckbox
+      btnCheckboxTrue="On" btnCheckboxFalse="Off">
+      {{ singleModel }}
+    </button>
+
+    <div class="form-group">
+      <timepicker [(ngModel)]="startTime" name="startTime"></timepicker>
+      <pre class="alert alert-info">Time is: {{startTime}}</pre>
+    </div>
+
+    <div class="form-group">
+      <rating [(ngModel)]="userRating" [max]="maxRating" [readonly]="isReadonly" name="userRating" id="userRating"
+        [titles]="['one','two','three']"></rating>
+    </div>
+    <p>User Rating: {{ userRating }}</p>
     <div class="form-check form-group">
-      <input class="form-check-input" type="checkbox" name="emailoffers" id="emailoffers" [(ngModel)]="userSettings.emailOffers" />
+      <input class="form-check-input" type="checkbox" name="emailoffers" id="emailoffers"
+        [(ngModel)]="userSettings.emailOffers" />
       <label class="form-check-label" for="flexCheckDefault">
         Email Special Offers
       </label>
     </div>
     <p>User Interface Style</p>
     <div class="form-group">
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="interfaceStyle" value="Light" id="interfaceStyle" [(ngModel)]="userSettings.interfaceStyle" />
-        <label class="form-check-label" for="lightInterface">
-          Light
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="interfaceStyle" value="Medium" id="interfaceStyle" [(ngModel)]="userSettings.interfaceStyle" />
-        <label class="form-check-label" for="mediumInterface">
-          Medium
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="interfaceStyle" value="Dark" id="interfaceStyle" [(ngModel)]="userSettings.interfaceStyle" />
-        <label class="form-check-label" for="darkInterface">
-          Dark
-        </label>
+      <div class="btn-group">
+        <label class="btn btn-primary" [(ngModel)]="userSettings.interfaceStyle" name="interfaceStyle" btnRadio="Light"
+          tabindex="0" role="button">Light</label>
+        <label class="btn btn-primary" [(ngModel)]="userSettings.interfaceStyle" name="interfaceStyle" btnRadio="Medium"
+          tabindex="0" role="button">Medium</label>
+        <label class="btn btn-primary" [(ngModel)]="userSettings.interfaceStyle" name="interfaceStyle" btnRadio="Dark"
+          tabindex="0" role="button">Dark</label>
       </div>
     </div>
     <div class="form-group">
       <label for="subscriptionType">Subscription Type</label>
-      <select class="form-select form-select-sm" id="subscriptionType" name="subscriptionType" aria-label="Small select example" [(ngModel)]="userSettings.subscriptionType">
+      <select class="form-select form-select-sm" id="subscriptionType" name="subscriptionType"
+        aria-label="Small select example" [(ngModel)]="userSettings.subscriptionType">
         <option *ngFor="let stype of subscriptionTypes | async">
           {{ stype }}
-      </option>
+        </option>
       </select>
     </div>
     <div class="form-group">

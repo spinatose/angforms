@@ -10,7 +10,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./user-settings-form.component.css']
 })
 export class UserSettingsFormComponent implements OnInit {
-
+  isReadonly: boolean = false;
+  maxRating: number = 10;
   originalUserSettings: UserSettings = {
     emailOffers: null,
     interfaceStyle: null,
@@ -20,7 +21,11 @@ export class UserSettingsFormComponent implements OnInit {
   }
   postError = false;
   postErrorMessage = "";
-  subscriptionTypes!: Observable<string[]> ;
+  singleModel = "On";
+  startDate!: Date;
+  startTime!: Date;
+  subscriptionTypes!: Observable<string[]>;
+  userRating: number = 1;
   userSettings!: UserSettings;
 
   constructor(private userService: UserService) { }
@@ -28,6 +33,8 @@ export class UserSettingsFormComponent implements OnInit {
   ngOnInit(): void {
     this.subscriptionTypes = this.userService.getSubscriptionTypes();
     this.userSettings = { ...this.originalUserSettings };
+    this.startDate = new Date();
+    this.startTime = new Date();
   }
 
   onBlur(field: NgModel) {
